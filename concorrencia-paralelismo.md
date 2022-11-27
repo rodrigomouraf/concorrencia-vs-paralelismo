@@ -197,56 +197,157 @@ Quando utilizamos um readFile() dentro do node, ele faz uma requisição para a 
 
 segue link muito interessante de como criar paralelismo no node: https://www.youtube.com/watch?v=AGLq2stqAyY
 
-### Concorrência
+## GoLang
 
-Goroutines
+Como dissemos no capítulo que abordamos sobre CPU, o primeiro CPU desenvolvido a nível popular, com mais de um núcleo foi o Dual Core, ele foi lançado em 2006, até então todas as linguagens como JAVA, C#, C++, Python, entre outras, já existiam e não tinham em seu core a preocupação com o paralelismo.
 
-Basicamente tudo em Go funciona com goroutines, inclusive a execução principal do programa. Por isso, qualquer chamada de uma nova goroutine acontece dentro de uma goroutine.
+Hoje muitas dessas linguagens já nos dão a possibilidade de conseguirmos rodar códigos paralelizados, mas não é de uma forma simples, caso tenham visto, no node, que colocamos um link da forma de paralelizarmos o programa, precisamos controlar tanto o número de processadores que temos como vários outros fluxos que acabam dificultando e aumentando o tempo de desenvolvimento das aplicações, sem tirar o fato que o desenvolvedor tem que saber muito bem o que está fazendo.
 
-2006 processador dual core
+Pensando nisso a Google desenvolveu a linguagem GoLang em 2007, a linguagem Go foi criada por três gênios da computação, entre eles estão os criadores da linguagem B que deu origem a linguagem C e do Unix. Para poder utilizar o máximo dos recursos da CPU, a própria linguagem se encarrega de rodar o código concorrente ou paralelizado.
 
-2007 criação linguagem go
+### Goroutines
 
-https://www.tomshardware.com/news/cpu-core-definition,37658.html
+Tudo em GoLang é pensado em goroutine, o programa main é uma goroutine, e se formos utilizar os métodos assíncronos não será diferente, mas como conseguimos rodar uma goroutine? basta colocarmos o go na frente da chamada de nossa função.
 
-https://aprendagolang.com.br/2021/11/12/entenda-a-diferenca-entre-concorrencia-e-paralelismo/
+Uma forma de verificar quantas goroutines vou utilizada em nosso código é importando o pacote runtime e implementando a função runtime.NumGoroutine().
+
+Uma preocupação que devemos ter em mente é se nossos programas estão sofrendo de race condition. Race condition ocorrem quando dois processos de programas de computador, ou threads, tentam acessar o mesmo recurso ao mesmo tempo e causam problemas no sistema.
+
+Uma forma de testar se nossos softwares estão seguros é rodando o teste abaixo, nesse teste será mostrado se o programa está seguro
+
+```bash
+go run -race nome_arquivo.go
+```
+
+Para não sofrermos com essas condições de corrida em Go, utilizamos os canais.
+
+### Channel
+
+Canais em Go garantem que não ocorram race condition, eles bloqueiam as variáveis em quanto o uso das mesmas para que não ocorra nenhuma falha.
+
+### Exemplo:
+
+Utilizando o mesmo exemplo que realizamos em node, vamos montar a programação em Go. Vamos deixar o código mais curto para que possamos entender melhor como funciona a utilização de canais.
+
+```Go
+package main
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+var wg sync.WaitGroup
+
+func main() {
+	fruta := make(chan string)
+	ovos := make(chan string)
+
+	go comprarOvo(ovos)
+	go comprarFrutas(fruta)
+	wg.Wait()
+	fmt.Println("Maria vai fazer bolo de", <-fruta)
+}
+
+func comprarOvo(ovos chan string) {
+	wg.Add(1)
+	fmt.Println("Pedro chegou no mercado")
+	time.Sleep(2 * time.Second)
+	fmt.Println("Pedro comprou ovos")
+	ovos <- "comprei ovos"
+	wg.Done()
+}
+
+func comprarFrutas(fruta chan string) {
+	wg.Add(1)
+	fmt.Println("Joaquina chegou na frutaria")
+	time.Sleep(4 * time.Second)
+	fmt.Println("Joaquina comprou uva")
+	fruta <- "uva"
+	wg.Done()
+}
+
+```
+
+retorno do programa:
+
+```bash
+Joaquina chegou na frutaria
+Pedro chegou no mercado
+Pedro comprou ovos
+Joaquina comprou uva
+Maria vai fazer bolo de uva
+```
+
+
+
+## Referências
+
+Concorrência
+
+https://www.youtube.com/watch?v=SgNrDqdNVG4
 
 https://www.youtube.com/watch?v=oV9rvDllKEg
 
-https://www.apriorit.com/dev-blog/652-virtualization-golang-c-java-for-building-microservices
+CPU
 
-https://www.youtube.com/watch?v=CiMnb06C4po
+https://www.tomshardware.com/news/cpu-core-definition,37658.html
 
 https://www.meupositivo.com.br/doseujeito/tecnologia/o-que-e-processador/
 
-https://www.geeksforgeeks.org/what-are-threads-in-computer-processor-or-cpu/
-
-https://www.treinaweb.com.br/blog/concorrencia-paralelismo-processos-threads-programacao-sincrona-e-assincrona/
-
 https://thunderboltlaptop.com/what-is-a-multi-threaded-cpu/
 
-https://itigic.com/multi-threaded-execution-on-cpu-how-it-works-in-performance/
+https://www.youtube.com/watch?v=CiMnb06C4po
 
-https://deepu.tech/concurrency-in-modern-languages/
+https://www.youtube.com/watch?v=NU5DSgPeQlY
+
+https://www.youtube.com/watch?v=lpxidDBi3GI&list=PLOPhmNgGl9gQTycQXcv2ytnkcWUSUG2IZ&index=10
+
+GoLang
+
+https://aprendagolang.com.br/2021/11/12/entenda-a-diferenca-entre-concorrencia-e-paralelismo/
+
+https://aprendagolang.com.br/2021/11/19/o-que-sao-e-como-funcionam-as-goroutines/
 
 https://www.youtube.com/watch?v=unofca9ooS4&list=PLCKpcjBB_VlBsxJ9IseNxFllf-UFEXOdg&index=125
 
-https://www.mailgun.com/blog/it-and-engineering/how-use-parallel-programming/
+https://stackoverflow.com/questions/13596186/whats-the-point-of-one-way-channels-in-go
+
+Memória Cache
 
 https://www.youtube.com/watch?v=UxHM7_BaMTY
 
 https://www.techtudo.com.br/noticias/2016/10/o-que-e-memoria-cache-entenda-sua-importancia-para-o-pc.ghtml
 
-https://www.youtube.com/watch?v=NU5DSgPeQlY
+Multithreading
 
-https://www.youtube.com/watch?v=xNBMNKjpJzM
+https://itigic.com/multi-threaded-execution-on-cpu-how-it-works-in-performance/
+
+https://www.quora.com/Does-multithreading-use-multiple-cores?share=1
+
+Node
 
 https://www.youtube.com/watch?v=AGLq2stqAyYs
 
+Paralelismo
+
+https://www.mailgun.com/blog/it-and-engineering/how-use-parallel-programming/
+
+Threads
+
+https://www.geeksforgeeks.org/what-are-threads-in-computer-processor-or-cpu/
+
+https://www.youtube.com/watch?v=xNBMNKjpJzM
+
+Outros
+
+https://www.apriorit.com/dev-blog/652-virtualization-golang-c-java-for-building-microservices
+
+https://www.treinaweb.com.br/blog/concorrencia-paralelismo-processos-threads-programacao-sincrona-e-assincrona/
+
+https://deepu.tech/concurrency-in-modern-languages/
+
 https://www.baeldung.com/cs/async-vs-multi-threading
 
-https://www.youtube.com/watch?v=SgNrDqdNVG4
-
-https://aprendagolang.com.br/2021/11/19/o-que-sao-e-como-funcionam-as-goroutines/
-
-https://stackoverflow.com/questions/30261032/how-to-implement-an-abstract-class-in-go
+https://www.techtarget.com/searchstorage/definition/race-condition
