@@ -34,6 +34,12 @@ Threads são menos custosas que processos mas ainda assim são custosas, quando 
 
 Um processador pode ter uma ou duas threds, por que não mais que isso? porque isso aumenta o tamanho do processador que aumenta o tempo do sinal elétrico ir de um canto a outro do processador, isso faria que tivéssemos que diminuir o clock do cpu.
 
+### Thread vs Processos
+
+Vamos conversar agora sobre algumas diferenças entre thread e processos, quando devemos escolher um ou o outro? Na programação tudo é uma troca e análise de ganhos e perdas.
+
+Um bom exemplo para abordarmos esse tema é analisarmos o Google Crhome. Me lembro de quando eu usava o navegador antigamente, eu gostava de criar algumas janelas e abrir apenas algumas abas por janela, porque em determinado momento se uma aba que estivesse usando dentro de uma janela desse erro todas as outras abas também "quebrariam" fazendo eu perder todos os itens daquela janela. Hoje usando o Crhome não temos esse problema, com ele é criado um processo novo para cada aba, quando ocorre um erro somente fechamos a aba e tudo continua igual, mas lembra quando eu falei do custo não é mesmo, quem aí já não sofreu em usar o Chrome por ele consumir muita ram?!
+
 ### Memória Cache
 
 Para evitar conflitos entre os cores existe uma parte na CPU dedicada a controlar o acesso a memória, os cores pedem ou enviam informação para essa unidade de controle e esse módulo de gerenciamento de memória que comunica efetivamente a informações com a memória principal.
