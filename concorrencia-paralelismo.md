@@ -18,11 +18,21 @@ Por mais que pareça que paralelismo é a melhor opção, nem sempre isso se tor
 
 Primeiro vamos analisar o computador em sua essência. Uma CPU tem hoje em dia diversos cores que são os processadores, ou seja, pegando o primeiro Intel com mais de um processador, "popular" como exemplo,  temos o Core 2 Duo, e o que é esse CPU? ele nada mais é que uma bolacha (e não biscoito), com dois processadores lá dentro, referenciando um pouco mais o processador que é o mesmo que core que seria a própria ULA.
 
+### Processos
+
+Desenvolver novos processos é menos complexo que threads, isso porque quando desenvolvemos processos não precisamos gerenciar manualmente mutexes, não nos preocupamos com race conditions ou dead-lock.
+
+Porém criar processos é bem mais custoso do que criar uma thread, os sistema operacionais têm diferentes formas de lidar com criações de processos um exemplo disso é a diferença entre o Linux e o Windows na hora de criar um processo, criar um processo no Linux é menos custoso que criar um processo no MacOS e uma ordem de grandeza menor do que criar um processo no Windows (AKITANDO #43).
+
+Um processo filho no Linux aponta para a memória do processo master, e novos recursos gerados por esse processo ficam restritos ao escopo do filho. Já no Windows o processo filho realiza uma cópia do master sendo assim mais custoso.
+
 ### Thread
 
-Agora vamos falar um pouco sobre Thread, um processador pode ter uma ou duas Threds, por que não mais que isso? porque isso aumenta o tamanho do processador que aumenta o tempo do sinal elétrico ir de um canto a outro do processador, isso faria que tivéssemos que diminuir o clock do cpu. 
+Basicamente as threads são as sequências de cálculos que deverão ser realizados por um processo.
 
-As Threads são as sequencias de cálculos que deverão ser realizados.
+Threads são menos custosas que processos mas ainda assim são custosas, quando criamos uma thread precisamos alocar memória, tem o context switching e o use land para o Kernel se preocupar.   
+
+Um processador pode ter uma ou duas threds, por que não mais que isso? porque isso aumenta o tamanho do processador que aumenta o tempo do sinal elétrico ir de um canto a outro do processador, isso faria que tivéssemos que diminuir o clock do cpu.
 
 ### Memória Cache
 
