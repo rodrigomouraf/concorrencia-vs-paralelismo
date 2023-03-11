@@ -18,6 +18,8 @@ Por mais que pareça que paralelismo é a melhor opção, nem sempre isso se tor
 
 Primeiro vamos analisar o computador em sua essência. Uma CPU tem hoje em dia diversos cores que são os processadores, ou seja, pegando o primeiro Intel com mais de um processador, "popular" como exemplo,  temos o Core 2 Duo, e o que é esse CPU? ele nada mais é que uma bolacha (e não biscoito), com dois processadores lá dentro, referenciando um pouco mais o processador que é o mesmo que core que seria a própria ULA.
 
+A CPU conta com a definição de processadores físicos e processadores lógicos. O número de processadores físicos é igual ao número de processadores da CPU e o número de processadores lógicos é geralmente o dobro do número de processadores físicos.
+
 ### Processos
 
 Desenvolver novos processos é menos complexo que threads, isso porque quando desenvolvemos processos não precisamos gerenciar manualmente mutexes, não nos preocupamos com race conditions ou dead-lock.
