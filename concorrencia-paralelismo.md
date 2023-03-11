@@ -362,6 +362,8 @@ https://www.youtube.com/watch?v=xNBMNKjpJzM
 
 Outros
 
+https://www.linuxdescomplicado.com.br/2016/11/dirty-cow-o-quao-prejudicial-vulnerabilidades-como-essa-podem-ser.html
+
 https://www.apriorit.com/dev-blog/652-virtualization-golang-c-java-for-building-microservices
 
 https://www.treinaweb.com.br/blog/concorrencia-paralelismo-processos-threads-programacao-sincrona-e-assincrona/
