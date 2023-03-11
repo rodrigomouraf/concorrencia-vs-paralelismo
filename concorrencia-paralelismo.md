@@ -322,6 +322,8 @@ https://www.youtube.com/watch?v=NU5DSgPeQlY
 
 https://www.youtube.com/watch?v=lpxidDBi3GI&list=PLOPhmNgGl9gQTycQXcv2ytnkcWUSUG2IZ&index=10
 
+https://itigic.com/pt/how-is-a-processor-made-intel-explains/
+
 GoLang
 
 https://aprendagolang.com.br/2021/11/12/entenda-a-diferenca-entre-concorrencia-e-paralelismo/
