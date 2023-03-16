@@ -12,6 +12,8 @@ import (
 var wg sync.WaitGroup
 
 func main() {
+	start := time.Now()
+
 	fmt.Println("Número de processadores inicio: ", runtime.NumCPU())
 	fmt.Println("Número de coroutine inicio: ", runtime.NumGoroutine())
 
@@ -29,7 +31,9 @@ func main() {
     }
 
 	fmt.Println("Maria vai fazer bolo de", <-buscarFruta)
-	
+
+	elapsed := time.Since(start)
+    fmt.Printf("Tempo decorrido: %s\n", elapsed)	
 }
 
 func iniciarPreparo(){
