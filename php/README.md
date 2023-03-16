@@ -1,4 +1,6 @@
-### Arquivo feito para testes direto no container
+### Aplicação montada para testes
+
+### Rodando diretamente no container:
 
 Rodar as linhas no terminal:
 
