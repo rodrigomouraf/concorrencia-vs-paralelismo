@@ -5,6 +5,7 @@
 Rodar as linhas no terminal:
 
 sudo docker pull phpdockerio/php:8.1-fpm
+
 sudo docker run --name testeasyncphp -it -v "$PWD:/public" phpdocker_php-fpm bash
 
 vá até a pasta public do seu container
