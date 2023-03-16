@@ -1,0 +1,6 @@
+{
+    "require": {
+        "react/async": "^4.0.0",
+        "react/promise-timer": "^1.9.0"
+    }
+}
