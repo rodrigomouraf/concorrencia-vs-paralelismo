@@ -1,12 +1,32 @@
-# Concurrency vs Parallelism
+Copiar
 
-This repository contains my study notes about **concurrency**, **parallelism**, and how they relate to CPUs, threads, async code, Node.js, and Go.
+# Concurrency vs Parallelism Notes
 
-The content is divided into three parts:
+This repository contains my personal study notes about **concurrency**, **parallelism**, and how they connect to real-world programming.
+
+The goal is to go beyond simple definitions and show how these ideas relate to:
+
+- How **CPUs** actually work (cores, threads, cache)
+- The difference between **processes** and **threads**
+- **Synchronous vs asynchronous** execution
+- **Concurrency vs parallelism** in practice
+- Real examples in **Node.js** (async/await, libuv) and **Go** (goroutines, channels)
+
+The content is split into three parts to make it easier to read and reuse:
 
 - [Part 1 – Concurrency vs Parallelism (the big picture)](./part-1-concurrency-vs-parallelism.md)  
+  High-level concepts, mental models, and simple analogies (coffee, house cleaning, etc.).
+
 - [Part 2 – CPUs, processes, threads, and cache memory](./part-2-cpu-threads-cache.md)  
-- [Part 3 – Concurrency and parallelism in practice (Node.js and Go)](./part-3-concurrency-node-go.md)
+  How the hardware and the OS influence concurrency: cores, logical vs physical processors, process creation cost on different OSes, and cache (L1/L2/L3).
+
+- [Part 3 – Concurrency and parallelism in practice (Node.js and Go)](./part-3-concurrency-node-go.md)  
+  Asynchronous code in Node.js, when you really need parallelism, and how Go uses goroutines and channels to make concurrency easier and safer.
+
+These notes are not meant to be a formal textbook.  
+They are the way I organized what I’ve learned, with examples, analogies, and references that helped me understand the topic more deeply.
+
+Feel free to read, fork, or open issues if you want to discuss any of the ideas.
 
 ---
 
